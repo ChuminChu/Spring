@@ -46,13 +46,7 @@ public class MyTest {
         assertThat(abs(3)).isEqualTo(3);
         assertThat(abs(-3)).isEqualTo(3);
         assertThat(abs(0)).isEqualTo(0);
-        //10
-        assertThat(isEmpty("")).isTrue();
-        assertThat(isEmpty("a")).isFalse();
-        assertThat(isEmpty("    ")).isFalse();
-        //11
-        assertThat(concat("hello","world")).isEqualTo("helloworld");
-        assertThat(concat("안녕","하세요")).isEqualTo("안녕하세요");
+
     }
 
     //1. 정수 하나를 입력받아 제곱한 값을 반환한다.
@@ -139,20 +133,6 @@ public class MyTest {
         } return a;
     }
 
-    //10. 문자열 하나를 전달 받아 빈 문자열인지 판단한 결과를 반환한다.
-    boolean isEmpty(String a){
-        if(a.equals("")){
-            return true;
-        } return false;
-    }
 
-
-    //11. 두 단어를 합쳐서 출력하자
-    String concat(String s1, String s2){
-        return s1 + s2;
-    }
-
-    //'1' 또는 '3'으로 시작(남자)하면 true, 아니면 false
-    
 
 }
