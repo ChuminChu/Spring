@@ -155,7 +155,4 @@ public class MyTest {
     //'1' 또는 '3'으로 시작(남자)하면 true, 아니면 false
     
 
-
-    //
-
 }
