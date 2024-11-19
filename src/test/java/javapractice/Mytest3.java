@@ -27,6 +27,10 @@ public class Mytest3 {
         assertThat(isValidPhoneNumber("00012345678")).isFalse();
         assertThat(isValidPhoneNumber("010xxxx5678")).isFalse();
 
+        assertThat(extractDomain("https://git-scm.com/book/en/v2")).isEqualTo("git-scm.com");
+        assertThat(extractDomain("https://www.google.com/search?q=java")).isEqualTo("www.google.com");
+        assertThat(extractDomain("https://www.op.gg/modes/aram/teemo/build?region=global&tier=all")).isEqualTo("www.op.gg");
+
     }
 
     boolean isValidEmail(String a){
@@ -80,6 +84,30 @@ public class Mytest3 {
         }
         return false;
     }
+
+
+    String extractDomain(String str){
+        String result = str.substring(str.indexOf("://",5)+3, str.indexOf("/",8));
+        //+3을 안해주면 ://부터 출력하게 됨..
+        return result;
+    }
+
+    //비밀번호 문자열이 최소 8자 이상, 대문자/소문자/숫자/특수문자를 각각 최소 1개 포함하는지 확인하여
+   /* boolean powerPassword(String str){
+        if(str.length() >= 8){
+
+            for(int i = 0; i < str.length(); i++){
+                char c1 = str.charAt(i);
+                //대문자면?
+
+            }
+            //소문자
+            //숫자
+            //특수문자
+        }
+    }
+
+    */
 
 
 
