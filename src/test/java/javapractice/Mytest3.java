@@ -31,6 +31,13 @@ public class Mytest3 {
         assertThat(extractDomain("https://www.google.com/search?q=java")).isEqualTo("www.google.com");
         assertThat(extractDomain("https://www.op.gg/modes/aram/teemo/build?region=global&tier=all")).isEqualTo("www.op.gg");
 
+        assertThat(powerPassword("a1@")).isFalse();
+        assertThat(powerPassword("A1@")).isFalse();
+        assertThat(powerPassword("Aa@")).isFalse();
+        assertThat(powerPassword("Aa1")).isFalse();
+        assertThat(powerPassword("Aa1@")).isTrue();
+
+
     }
 
     boolean isValidEmail(String a){
@@ -73,6 +80,7 @@ public class Mytest3 {
     }
 
     boolean isValidPhoneNumber(String str){
+        /*
         if(str.length() == 11 && str.startsWith("010")){ //길이가 11이고 시작이 010이면
             for(int i = 0; i < 11; i++){//반복을 시작해라
                 char c1 = str.charAt(i);//하나씩 뜯어봤을 때
@@ -83,35 +91,162 @@ public class Mytest3 {
             return true;
         }
         return false;
+
+         */
+
+        //유효하지 않는 것으로 활용해서 경우의 수를 줄여나간다.
+        if(str.length() != 11){
+            return false;
+        }
+
+        if(!str.startsWith("010")){
+            return false;
+        }
+
+        for(int i = 0; i< str.length(); i++){
+            if(!Character.isDigit(str.charAt(i))){
+                return false;
+            }
+        }
+        return true;
     }
 
 
     String extractDomain(String str){
-        String result = str.substring(str.indexOf("://",5)+3, str.indexOf("/",8));
-        //+3을 안해주면 ://부터 출력하게 됨..
-        return result;
+
+        return str.substring(str.indexOf("/",8), str.indexOf("/",8));
+
     }
 
     //비밀번호 문자열이 최소 8자 이상, 대문자/소문자/숫자/특수문자를 각각 최소 1개 포함하는지 확인하여
-   /* boolean powerPassword(String str){
-        if(str.length() >= 8){
-
-            for(int i = 0; i < str.length(); i++){
-                char c1 = str.charAt(i);
-                //대문자면?
-
-            }
-            //소문자
-            //숫자
-            //특수문자
+    boolean powerPassword(String password) {
+        //대문자를 판별하는 함수를 가지고 와서 활용
+        if (!hasOneUpperCaseAtLeast(password)) {
+            return false;
         }
+
+        //소문자를 판별하는 함수를 가져와서 활용
+        if (!hasOneLowerCaseAtLeast(password)) {
+            return false;
+        }
+
+        //숫자를 판별하는 함수를 가져와서 활용
+        if(!hasOneNumberAtLeast(password)){
+            return false;
+        }
+        //특수문자를 판별하는 함수를 가져와서 활용
+        if(!hasOneSpeacialAtLeast(password)){
+            return false;
+        }
+        //4가지 조건이 다 만족하면
+        return true;
+    }
+//            // 대문자
+//            boolean hasUpperCase = false;
+//            for (int i = 0; i < password.length(); i++) {
+//                if (Character.isUpperCase(password.charAt(i))) {
+//                    hasUpperCase = true;
+//                }
+//            }
+//            if (!hasUpperCase) {
+//                return false;
+//            }
+//
+//            // 소문자
+//            boolean hasLowerCase = false;
+//            for (int i = 0; i < password.length(); i++) {
+//                if (Character.isLowerCase(password.charAt(i))) {
+//                    hasLowerCase = true;
+//                }
+//            }
+//            if (!hasLowerCase) {
+//                return false;
+//            }
+//
+//            // 숫자
+//            boolean hasDigit = false;
+//            for (int i = 0; i < password.length(); i++) {
+//                if (Character.isDigit(password.charAt(i))) {
+//                    hasDigit = true;
+//                }
+//            }
+//            if (!hasDigit) {
+//                return false;
+//            }
+//
+//            // 특수문자
+//            String specialChars = "!@#$%^&*()";
+//            boolean hasSpecialChar = false;
+//            for (int i = 0; i < password.length(); i++) {
+//                if (specialChars.contains(String.valueOf(password.charAt(i)))) {
+//                    hasSpecialChar = true;
+//                }
+//            }
+//            if (!hasSpecialChar) {
+//                return false;
+//            }
+//
+//            return true;
+//        }
+
+    //대문자를 판별하는 함수
+    boolean hasOneUpperCaseAtLeast(String password) {
+        boolean hasUpperCase = false;
+        for (int i = 0; i < password.length(); i++) {
+            if (Character.isUpperCase(password.charAt(i))) {
+                hasUpperCase = true;
+            }
+        }
+        if (!hasUpperCase) {
+            return false;
+        }
+
+        return true;
     }
 
+    //소문자를 판별하는 함수
+    boolean hasOneLowerCaseAtLeast(String password) {
+        boolean hasLowerCase = false;
+        for (int i = 0; i < password.length(); i++) {
+            if (Character.isLowerCase(password.charAt(i))) {
+                hasLowerCase = true;
+            }
+        }
+        if (!hasLowerCase) {
+            return false;
+        }
+        return true;
+    }
 
+    //숫자를 판별하는 함수
+    boolean hasOneNumberAtLeast(String password) {
+        boolean hasDigit = false;
+        for (int i = 0; i < password.length(); i++) {
+            if (Character.isDigit(password.charAt(i))) {
+                hasDigit = true;
+            }
+        }
+        if (!hasDigit) {
+            return false;
+        }
+        return true;
+    }
 
-    */
+    //특수문자를 판별하는 함수
+    boolean hasOneSpeacialAtLeast(String password) {
+        String specialChars = "!@#$%^&*()";
+            boolean hasSpecialChar = false;
+            for (int i = 0; i < password.length(); i++) {
+                if (specialChars.contains(String.valueOf(password.charAt(i)))) {
+                    hasSpecialChar = true;
+                }
+            }
+            if (!hasSpecialChar) {
+                return false;
+            }
 
-
+            return true;
+        }
 
 
 }
