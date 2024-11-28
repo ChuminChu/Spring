@@ -1,6 +1,5 @@
 package javapractice;
 
-import com.jayway.jsonpath.internal.function.numeric.Max;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -52,6 +51,23 @@ public class ListFunction {
         /*assertThat(removeDuplicates(List.of(1, 2, 2, 3, 4, 4, 5))).isEqualTo(List.of(1, 2, 3, 4, 5));
         assertThat(removeDuplicates(List.of(1, 1, 1, 1))).isEqualTo(List.of(1));
         assertThat(removeDuplicates(List.of())).isEqualTo(List.of());*/
+
+        /*assertThat(calculateRanks(List.of(80, 90, 70, 85))).isEqualTo(List.of(3, 1, 4, 2));
+        assertThat(calculateRanks(List.of(100, 100, 80))).isEqualTo(List.of(1, 1, 3));
+        assertThat(calculateRanks(List.of())).isEqualTo(List.of());*/
+
+        assertThat(calculateTotalPrice(List.of(1000, 2000, 3000))).isEqualTo(6000);
+        assertThat(calculateTotalPrice(List.of(5000))).isEqualTo(5000);
+        assertThat(calculateTotalPrice(List.of())).isEqualTo(0);
+
+        assertThat(applyDiscount(List.of(1000, 2000, 3000), 10)).isEqualTo(List.of(900, 1800, 2700));
+        assertThat(applyDiscount(List.of(5000), 50)).isEqualTo(List.of(2500));
+        assertThat(applyDiscount(List.of(), 20)).isEqualTo(List.of());
+
+        assertThat(filterExpensiveItems(List.of(1000, 2000, 3000, 4000), 2500)).isEqualTo(List.of(3000, 4000));
+        assertThat(filterExpensiveItems(List.of(1000, 1500, 2000), 3000)).isEqualTo(List.of());
+        assertThat(filterExpensiveItems(List.of(), 2000)).isEqualTo(List.of());
+
     }
 
     //합 구하기
@@ -159,8 +175,7 @@ public class ListFunction {
     }
 
     //리스트 중복 제거 - 는 모르겠다
-
-    /*List<Integer> removeDuplicates(List<Integer> num){
+   /* List<Integer> removeDuplicates(List<Integer> num){
         ArrayList<Integer> remove = new ArrayList<>();
         for (Integer i : num) {
             if(!remove.contains(i)){
@@ -170,6 +185,47 @@ public class ListFunction {
         return remove;
     }*/
 
+    //성적 순위 계산
+    /*List<Integer> calculateRanks(List<Integer> scoreRank){
+        ArrayList<Integer> rank = new ArrayList<>();
+        int win = scoreRank.get(0);
+        for (Integer i : scoreRank) {
+            if(i > win){
+                win = scoreRank.get(i);
+            }
+        }
+    }*/
 
+    //총 상품 가격 계산
+    int calculateTotalPrice(List<Integer> price){
+        int totalPrice = 0;
+        for (int i = 0; i < price.size(); i++) {
+            totalPrice = totalPrice + price.get(i);
+        }
+        return totalPrice;
+    }
 
+    //할인 적용된 가격 계산
+    List<Integer> applyDiscount(List<Integer> prices, int percent){
+        ArrayList<Integer> totalPrice = new ArrayList<>();
+        for (Integer price : prices) {
+            double discountedPrice= price * (1 - percent/100.0); //할인 가격
+            int roundedDiscountedPrice = (int)Math.round(discountedPrice);//할인된 가격을 반올림하여 새로운 리스트로 반환합니다.
+            totalPrice.add(roundedDiscountedPrice);
+        }
+        return totalPrice;
+    }
+
+    //고가상품 필터링
+    List<Integer> filterExpensiveItems(List<Integer> prices, int basePrice){
+        ArrayList<Integer> expensiveItems = new ArrayList<>();
+        for (Integer price : prices) {
+            if(price > basePrice){
+                expensiveItems.add(price);
+            }
+        }
+
+        return expensiveItems;
+
+    }
 }
