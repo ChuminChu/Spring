@@ -2,6 +2,7 @@ package javapractice;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -186,10 +187,5 @@ public class MapTest {
         for (Integer key : uni.keySet()) {
             System.out.println("key = " + key);
         }
-
-
-
-
-
     }
 }
