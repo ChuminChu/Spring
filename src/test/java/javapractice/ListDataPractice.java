@@ -57,7 +57,8 @@ public class ListDataPractice {
             System.out.println(emoji + 그나라도시들);
 
 
-            /*//코치님꺼
+            /*
+            //코치님꺼
             String emoji = "";
             if(나라.equals("한국")){
                 emoji = "❤\uFE0F";

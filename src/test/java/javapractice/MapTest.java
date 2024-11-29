@@ -42,8 +42,6 @@ public class MapTest {
         System.out.println(student.get("박연우"));
     }
 
-
-
     @Test
     void fruitPriceMap() {
         // 1. 과일 이름(String)과 가격(Integer)을 저장하는 Map을 생성하세요
