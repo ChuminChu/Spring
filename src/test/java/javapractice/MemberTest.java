@@ -1,7 +1,6 @@
 package javapractice;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.support.ManagedList;
 
 import java.util.*;
 
